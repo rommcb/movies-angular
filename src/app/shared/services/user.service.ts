@@ -11,7 +11,7 @@ export class UserService {
   
   private url : string = environment.urlApi1
   currentUser : User = {}
-  errorMessage : string = ''
+  // errorMessage : string = ''
 
   constructor(
     private _client : HttpClient
@@ -24,11 +24,11 @@ export class UserService {
         this.currentUser = data;
       },
         (error) => {
-        this.errorMessage = error.message;
+        // this.errorMessage = error.message;
         console.error('There was an error '+ error);
       }
     )
-    console.log('currentUser: '+this.currentUser)
+    console.log(this.currentUser)
   }
 
 }
