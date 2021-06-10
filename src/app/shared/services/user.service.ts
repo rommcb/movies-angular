@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NbGlobalLogicalPosition, NbToastrService } from '@nebular/theme';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthUser } from 'src/app/models/auth.model';
 import { User } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
@@ -15,6 +15,19 @@ export class UserService {
   private url : string = environment.urlApi1
   currentUser : AuthUser = {}
  
+  get firstname() : string {
+    return sessionStorage.getItem('firstName') ?? ''
+  }
+
+  firstnameSubject : Subject<string> = new Subject<string>()
+  //statusBSubject : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.status)
+  
+  emitFirstName() {
+    this.firstnameSubject.next(this.firstname) //correspond au Invoke() d'un delegate c# 
+                                         //correspond a la méhtode Emit() d'un event js
+
+    // this.statusBSubject.value
+  }
 
   constructor(
     private _client : HttpClient, 
@@ -44,7 +57,7 @@ export class UserService {
       sessionStorage.setItem('id', this.currentUser.id?.toString() ?? '0')
       sessionStorage.setItem('firstName', this.currentUser.firstName ?? '0')
 
-      console.log(this.currentUser)
+      this.emitFirstName()
       this._toastr.success("Vous êtes bien connecté", user.email, {duration : 5000})
       return this.currentUser
     },

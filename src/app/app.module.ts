@@ -7,11 +7,13 @@ import { NbThemeModule, NbLayoutModule, NbButtonModule, NbCardModule, NbInputMod
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NavComponent } from './nav/nav.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent
+    NavComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
