@@ -4,7 +4,7 @@ import { UserManagerRoutingModule } from './user-manager-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './components/login/login.component';
-import { NbDatepickerModule } from '@nebular/theme';
+import { NbDatepickerModule, NbToastrModule } from '@nebular/theme';
 
 
 
@@ -17,7 +17,8 @@ import { NbDatepickerModule } from '@nebular/theme';
     CommonModule,
     UserManagerRoutingModule, 
     SharedModule,
-    NbDatepickerModule
+    NbDatepickerModule,
+    NbToastrModule
   ]
 })
 export class UserManagerModule { }

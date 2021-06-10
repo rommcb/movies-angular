@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NbGlobalLogicalPosition, NbToastrService } from '@nebular/theme';
 import { User } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
 
@@ -10,26 +11,25 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   
   private url : string = environment.urlApi1
-  currentUser : User = {}
-  // errorMessage : string = ''
+  // currentUser : User = {email : '', password : '', firstName : '', lastName : '', birthDate : new Date()}
+ 
 
   constructor(
-    private _client : HttpClient
+    private _client : HttpClient, 
+    private _toastr : NbToastrService
   ) { }
 
   register(user : User) {
-      console.log('user param : '+ user.firstName)
-
-      this._client.post<User>(this.url+"User/register", user).subscribe( (data : User) => {
-        this.currentUser = data;
+      this._client.post(this.url+"User/register", user, {responseType : 'text'}).subscribe( 
+        () => {
+        this._toastr.success("Vous êtes bien enregistré", user.email, {duration : 5000})
       },
         (error) => {
-        // this.errorMessage = error.message;
-        console.error('There was an error '+ error);
-      }
+        this._toastr.danger(error.message, {duration : 500000})
+        console.log(error)
+      },
+        () => {this._toastr.info("Traitement de la méthode register() terminée", "titre", { position : NbGlobalLogicalPosition.BOTTOM_END})}
     )
-    console.log(this.currentUser)
   }
-
 }
 

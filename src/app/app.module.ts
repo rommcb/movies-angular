@@ -19,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    // NbToastrModule.forRoot(),
+    NbToastrModule.forRoot(),
     // NbDialogModule.forRoot(),
     NbThemeModule.forRoot({ name: 'dark' }), 
     NbLayoutModule,

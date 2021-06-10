@@ -12,7 +12,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class RegisterComponent implements OnInit {
 
   fg : FormGroup = this._builder.group([])
-  currentUser : User = {}
+  currentUser : User = {email : '', password : '', firstName : '', lastName : '', birthDate : new Date()}
 
   constructor(
     private _builder : FormBuilder,
@@ -28,7 +28,8 @@ export class RegisterComponent implements OnInit {
     this.fg  = this._builder.group({
       email : [null, Validators.required],
       password : [null, Validators.required],
-      firstName :[null, Validators.required], 
+      firstName :[null, Validators.required],
+      lastName :[null, Validators.required],  
       birthDate : [null, Validators.required]
       })
   }
@@ -37,18 +38,13 @@ export class RegisterComponent implements OnInit {
     let user = {
       email : this.fg.value['email'],
       password :  this.fg.value['password'],
-      firstName : this.fg.value['firstName'], 
+      firstName : this.fg.value['firstName'],
+      lastName : this.fg.value['lastName'],  
       birthDate :  this.fg.value['birthDate']
     }
-    console.log('Avant appel:' + user.firstName)
+    console.log('Birthdate:' + user.birthDate)
 
    this._us.register(user)
-
-    console.log('Après appel')
-
-    if (this._us.currentUser != null) {
-     console.log(this._us.currentUser.firstName + ' a bien été enregistré')
-    }
   }
 
 }
