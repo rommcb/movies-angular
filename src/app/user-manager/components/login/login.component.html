@@ -1,4 +1,25 @@
-<p>login works!</p>
-<form [formGroup]='fg' action="">
+<h2>Login</h2>
 
+<form [formGroup]="fg"  (ngSubmit)="login()">
+  <p>
+    <label>email : </label>
+    <input nbInput formControlName="email" />
+  </p>
+  <p>
+    <label>password : </label>
+    <input nbInput formControlName="password" />
+  </p>
+  
+  <button nbButton status="success" type="submit">Valider</button>
+  
 </form>
+
+<p *ngIf='sessionStorageObject != null'>
+  
+  id : {{sessionStorageObject.id}}
+  <br>
+  Prénom : {{sessionStorageObject.firstName}}
+  <br>
+  Token : {{sessionStorageObject.token}}
+</p>
+  
