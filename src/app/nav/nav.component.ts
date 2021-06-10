@@ -15,7 +15,8 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.listMenu = [
       { link: '/user/register', title: 'Sign up' }, 
-      { link: '/user/login', title: 'Login' }
+      { link: '/user/login', title: 'Login' },
+      { link: '/movies/list', title: 'Movies' }
     ]
   }
 

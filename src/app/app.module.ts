@@ -29,7 +29,7 @@ import { HeaderComponent } from './header/header.component';
     NbButtonModule,
     // NbCardModule,
     NbInputModule,
-    // NbListModule,
+    NbListModule,
     // NbSpinnerModule
     HttpClientModule, 
     NbDatepickerModule.forRoot()
