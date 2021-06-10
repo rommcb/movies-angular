@@ -1,0 +1,25 @@
+<h2>Sign up</h2>
+ <form [formGroup]="fg"  (ngSubmit)="submitForm()">
+<p>
+  <label>email : </label>
+  <input nbInput formControlName="email" />
+</p>
+<p>
+  <label>password : </label>
+  <input nbInput formControlName="password" />
+</p>
+
+<p>
+  <label>Prénom : </label>
+  <input nbInput formControlName="firstName" />
+</p>
+
+<p>
+  <label>Date de naissance : </label>
+  <input nbInput formControlName="birthDate"/>
+</p>
+
+<button nbButton status="success" type="submit">Valider</button>
+
+</form>
+
