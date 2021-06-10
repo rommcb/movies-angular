@@ -16,8 +16,11 @@
 
 <p>
   <label>Date de naissance : </label>
-  <input nbInput formControlName="birthDate"/>
+  <input nbInput [nbDatepicker]="datepicker" formControlName="birthDate">
+  <nb-datepicker #datepicker></nb-datepicker>
 </p>
+
+
 
 <button nbButton status="success" type="submit">Valider</button>
 
