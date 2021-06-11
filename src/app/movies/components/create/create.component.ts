@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MovieToDal, Person } from 'src/app/models/movie.model';
+import { never } from 'rxjs';
+import { Casting, MovieToDal, Person } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/shared/services/movie.service';
 import { PersonService } from 'src/app/shared/services/person.service';
 
@@ -37,13 +38,20 @@ export class CreateComponent implements OnInit {
     })
   }
 
-  addRole() : void {
-    this.getRoles().push(new FormControl(null, Validators.required))
+  createItem(): FormGroup {
+    return this._builder.group({
+      personId:  [null, Validators.required],
+      role: [null, Validators.required]
+    });
   }
 
-  getRoles() : FormArray {
+  addRole() : void {
+    this.getRoles().push(this.createItem())
+   }
+
+   getRoles() : FormArray {
     return this.fg.get('actors') as FormArray
-  }
+   }
 
   removeRole(index : number) : void {
     this.getRoles().removeAt(index)
@@ -67,7 +75,11 @@ export class CreateComponent implements OnInit {
         realisatorID : Number(this.fg.value['realisator']),  
         scenaristID :  Number(this.fg.value['scenarist'])
     }
-     this._ms.create(movieToDAL)
+
+    let casting : Casting[]= this.fg.value['actors']
+    console.log(casting)
+    
+    this._ms.create(movieToDAL, casting)
 
      // this._ms.setActor()
   }

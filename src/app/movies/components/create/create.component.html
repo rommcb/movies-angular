@@ -16,14 +16,27 @@
       </nb-select>
     </p>
 
-    <button type="button" (click)="addRole()" nbButton size="tiny">Ajouter un rôle</button>
+    <p><button nbButton type="button" (click)="addRole()" nbButton size="tiny">Ajouter un rôle</button></p>
 
+    
     <nb-list *ngIf="getRoles().controls" formArrayName="actors">
         <nb-list-item *ngFor="let c of getRoles().controls; let i = index">
-            Série {{i+1}} <input [status]="c.touched ? 'success' : 'warning'" nbInput type="text" [formControlName]="i">
-            &nbsp; <button nbButton status="danger" (click)="removeRole(i)">X</button>
+          <div [formGroupName]="i">
+            Acteur {{i+1}} &nbsp;<input [status]="c.touched ? 'success' : 'warning'" nbInput type="text" formControlName="role">
+
+            &nbsp;
+
+            <nb-select formControlName="personId" placeholder="Sélectionnez un acteur">
+              <nb-option *ngFor="let person of listPerson" value="{{person.id}}">{{person.firstName}} {{person.lastName}}</nb-option>
+            </nb-select>
+
+            &nbsp; 
+            
+            <button nbButton status="danger" (click)="removeRole(i)">X</button>
+          </div>
         </nb-list-item>
     </nb-list>
+ 
 
     <button nbButton status="success" type="submit">Valider</button>
 
