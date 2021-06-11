@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NbToastrService } from '@nebular/theme';
 import { Observable } from 'rxjs';
@@ -20,6 +20,14 @@ export class MovieService {
 
   getAll() : Observable<Movie[]>{
     return this._client.get<Movie[]>(this.url+'Movie')
+  }
+
+  getOne(id : number) : Observable<Movie> {
+    console.log('Hi from service getOne')
+    let header = new HttpHeaders({
+    'authorization' : 'bearer '+ sessionStorage.getItem('token')
+    })
+    return this._client.get<Movie>(this.url+"movie/"+id, {headers:header})
   }
 
   

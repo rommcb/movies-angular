@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { MoviesRoutingModule } from './movies-routing.module';
 import { ListComponent } from './components/list/list.component';
 import { NbListModule } from '@nebular/theme';
+import { DetailsComponent } from './components/details/details.component';
 
 
 @NgModule({
   declarations: [
-    ListComponent
+    ListComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,
