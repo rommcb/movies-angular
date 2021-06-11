@@ -6,8 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbButtonModule, NbCardModule, NbInputModule, NbListModule, NbSidebarModule, NbMenuModule, NbToastrModule, NbDialogModule, NbSpinnerModule, NbDatepickerModule, NbSelectModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NavComponent } from './nav/nav.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
+import { TokenInterceptor } from './movies/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { HeaderComponent } from './header/header.component';
     HttpClientModule, 
     NbDatepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [{ provide : HTTP_INTERCEPTORS, useClass : TokenInterceptor, multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

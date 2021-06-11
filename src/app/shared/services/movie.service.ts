@@ -26,18 +26,20 @@ export class MovieService {
 
   getOne(id: number): Observable<Movie> {
     console.log('Hi from service getOne')
-    let header = new HttpHeaders({
-      'authorization': 'bearer ' + sessionStorage.getItem('token')
-    })
-    return this._client.get<Movie>(this.url + "movie/" + id, { headers: header })
+
+    // let header = new HttpHeaders({
+    //   'authorization': 'bearer ' + sessionStorage.getItem('token')
+    // })
+    
+    return this._client.get<Movie>(this.url + "movie/" + id/*, {headers: header}*/)
   }
 
   create(movie: MovieToDal, castingList : Casting[]) : void{
     console.log(movie)
-    let header = new HttpHeaders({
-      'authorization': 'bearer ' + sessionStorage.getItem('token')
-    })
-    this._client.post<number>(this.url + "movie", movie, {headers: header}).subscribe(
+    // let header = new HttpHeaders({
+    //   'authorization': 'bearer ' + sessionStorage.getItem('token')
+    // })
+    this._client.post<number>(this.url + "movie", movie/*, {headers: header}*/).subscribe(
       (id : number) => {
         
         this.movieId = id ?? 0
@@ -64,13 +66,13 @@ export class MovieService {
 
     console.log(fullCasting)
 
-    let header = new HttpHeaders({
-      'authorization': 'bearer ' + sessionStorage.getItem('token')
-    })
+    // let header = new HttpHeaders({
+    //   'authorization': 'bearer ' + sessionStorage.getItem('token')
+    // })
 
-    console.log(header)
+    // console.log(header)
 
-    this._client.post<any>(this.url + "person/setActor", fullCasting, {headers: header}).subscribe(
+    this._client.post<any>(this.url + "person/setActor", fullCasting/*,{headers: header}*/).subscribe(
       () => {
         this._toastr.success("Role ajouté avec succès", fullCasting.role, { duration: 5000 })
       },

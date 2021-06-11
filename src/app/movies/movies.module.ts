@@ -7,6 +7,7 @@ import { NbCardModule, NbListModule, NbSelectModule } from '@nebular/theme';
 import { DetailsComponent } from './components/details/details.component';
 import { CreateComponent } from './components/create/create.component';
 import { SharedModule } from '../shared/shared.module';
+import { TokenInterceptor } from './token.interceptor';
 
 
 @NgModule({
