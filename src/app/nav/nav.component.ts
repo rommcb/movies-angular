@@ -16,7 +16,10 @@ export class NavComponent implements OnInit {
     this.listMenu = [
       { link: '/user/register', title: 'Sign up' }, 
       { link: '/user/login', title: 'Login' },
-      { link: '/movies/list', title: 'Movies' }
+      { title: 'Movies', children : [
+        { link: '/movies/list', title: 'Liste des films'},
+        { link: '/movies/create', title: 'Ajouter un film' }
+      ] }
     ]
   }
 

@@ -3,19 +3,18 @@
 
 <p>Description: {{currentMovie.description}}</p>
 
-<h3>Realisateur</h3>
+<h4>Realisateur</h4>
 <p>
   {{currentMovie.realisator ? (currentMovie.realisator.firstName + ' ' + currentMovie.realisator.lastName) : 'Unknown'}}
 </p>
 
-<h3>Scénariste</h3>
+<h4>Scénariste</h4>
 
 <p>
   {{currentMovie.scenarist ? (currentMovie.scenarist.firstName + ' ' + currentMovie.scenarist.lastName) : 'Unknown'}}
 </p>
 
-<h3>Acteurs</h3>
-
+<h4>Acteurs</h4>
 <nb-list *ngFor="let actor of currentMovie.actors">
   <nb-list-item>{{actor.firstName}} {{actor.lastName}}, playing: ' {{actor.role}}'</nb-list-item>
 </nb-list>

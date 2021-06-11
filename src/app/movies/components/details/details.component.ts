@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Actor, Movie, Person } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/shared/services/movie.service';
 
@@ -15,11 +16,15 @@ export class DetailsComponent implements OnInit {
   // realisator : Person = {}
 
   constructor(
+    private _activatedRoute : ActivatedRoute,
     private _ms : MovieService
   ) { }
 
+  parameterFromRoute : number = 0
+
   ngOnInit(): void {
-    this.getOne(1)
+    this.parameterFromRoute = this._activatedRoute.snapshot.params['id']
+    this.getOne(this.parameterFromRoute)
   }
 
   getOne (id : number) {

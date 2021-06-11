@@ -1,9 +1,7 @@
-<p>list works!</p>
+<h2>Liste des films</h2>
 
 <nb-list *ngFor="let movie of moviesList">
 
-  <nb-list-item>{{(movie.id ?? '0')}} - {{movie.title}}</nb-list-item>
+  <nb-list-item>{{(movie.id ?? '0')}} - {{movie.title}} &nbsp;<a *ngIf="token != ''" [routerLink]="['../details/'+movie.id]" >see details</a></nb-list-item>
 
 </nb-list>
-
-<p>test</p>

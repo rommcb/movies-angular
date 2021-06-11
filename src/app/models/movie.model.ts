@@ -32,12 +32,11 @@ export interface Casting
 }
 
 export interface MovieToDal{
-  id : number,
   title? : string,
   description? : string,
   releaseYear? : number,
   realisatorID? :  number,
-  scenaristID? :  number, 
+  scenaristID? :  number
 }
 
 

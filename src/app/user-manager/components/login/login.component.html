@@ -1,5 +1,7 @@
-<h2>Login</h2>
 
+<h2 *ngIf="sessionStorageObject.token == ''">Vous êtes déjà connecté</h2>
+
+<h2 *ngIf="sessionStorageObject.token != ''">Login</h2>
 <form [formGroup]="fg"  (ngSubmit)="login()">
   <p>
     <label>email : </label>

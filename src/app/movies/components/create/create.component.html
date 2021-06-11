@@ -1,0 +1,22 @@
+<h2>Ajouter un film</h2>
+
+<form [formGroup]="fg" (ngSubmit)=submitForm()>
+
+    <p>Titre: <input nbInput formControlName="title" type="text"> </p>
+    <p>Description: <input nbInput formControlName="description" type="text"></p>
+    <p>Année de sortie: <input nbInput formControlName="releaseYear" type="number" ></p>
+    <p>
+      <nb-select formControlName="scenarist" placeholder="Sélectionnez un scénariste">
+        <nb-option *ngFor="let person of listPerson" value="{{person.id}}">{{person.firstName}} {{person.lastName}}</nb-option>
+      </nb-select>
+    </p>
+    <p>
+      <nb-select formControlName="realisator" placeholder="Sélectionnez un réalisateur">
+        <nb-option *ngFor="let person of listPerson" value="{{person.id}}">{{person.firstName}} {{person.lastName}}</nb-option>
+      </nb-select>
+    </p>
+    <button nbButton status="success" type="submit">Valider</button>
+
+</form>
+
+

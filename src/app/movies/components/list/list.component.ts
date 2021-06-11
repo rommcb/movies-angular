@@ -10,7 +10,8 @@ import { MovieService } from 'src/app/shared/services/movie.service';
 export class ListComponent implements OnInit {
 
   moviesList : Movie[] = []
-
+  token : string = sessionStorage.getItem('token') ?? ''
+  
   constructor(
     private _ms : MovieService
   ) { }

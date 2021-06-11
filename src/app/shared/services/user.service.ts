@@ -56,7 +56,8 @@ export class UserService {
       sessionStorage.setItem('token', this.currentUser.token ?? '')
       sessionStorage.setItem('id', this.currentUser.id?.toString() ?? '0')
       sessionStorage.setItem('firstName', this.currentUser.firstName ?? '0')
-
+      sessionStorage.setItem('isAdmin', this.currentUser.isAdmin?.toString() ?? false.toString())
+      console.log(this.currentUser)
       this.emitFirstName()
       this._toastr.success("Vous êtes bien connecté", user.email, {duration : 5000})
       return this.currentUser
