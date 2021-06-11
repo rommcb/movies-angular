@@ -25,7 +25,6 @@ export interface Actor {
 // Post
 export interface Casting
 {
-  id : number,
   movieId : number,
   personId : number,
   role : string

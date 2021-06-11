@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NbGlobalLogicalPosition, NbToastrService } from '@nebular/theme';
 import { Observable } from 'rxjs';
-import { Movie, MovieToDal } from 'src/app/models/movie.model';
+import { Casting, Movie, MovieToDal } from 'src/app/models/movie.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -44,6 +44,21 @@ export class MovieService {
         console.log(error)
       })
   }
+
+  setActor(casting :Casting){
+    let header = new HttpHeaders({
+      'authorization': 'bearer ' + sessionStorage.getItem('token')
+    })
+    this._client.post<any>(this.url + "person/setActor", casting, {headers: header}).subscribe(
+      () => {
+        this._toastr.success("Role ajouté avec succès", casting.role, { duration: 5000 })
+      },
+      (error) => {
+        this._toastr.danger(error.message, { duration: 500000 })
+        console.log(error)
+      })
+  }
+
 
 
 }
