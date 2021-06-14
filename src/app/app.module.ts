@@ -35,7 +35,8 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule, 
     ReactiveFormsModule, 
     NbInputModule, 
-    NbButtonModule
+    NbButtonModule, 
+    NbCardModule
   ],
   providers: [{ provide : HTTP_INTERCEPTORS, useClass : TokenInterceptor, multi : true}],
   bootstrap: [AppComponent]

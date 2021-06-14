@@ -16,11 +16,9 @@ export class UserService {
   private url: string = environment.urlApi1
   currentUser: AuthUser = {}
 
-  //--------------------------------
-  get firstname(): string {
-    return sessionStorage.getItem('firstName') ?? ''
-  }
-
+  // get firstname(): string {
+  //   return sessionStorage.getItem('firstName') ?? ''
+  // }
 
   currentUserSubject: Subject<AuthUser> = new Subject<AuthUser>();
 
@@ -88,6 +86,7 @@ export class UserService {
   logout() {
     localStorage.clear()
     sessionStorage.clear()
+    console.log('Logging out')
     this.emitUser()
   }
 

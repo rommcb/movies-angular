@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NbDialogService } from '@nebular/theme';
-import { never } from 'rxjs';
 import { Casting, MovieToDal, Person } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/shared/services/movie.service';
 import { PersonService } from 'src/app/shared/services/person.service';

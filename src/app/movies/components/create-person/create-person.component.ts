@@ -32,10 +32,9 @@ export class CreatePersonComponent implements OnInit {
       firstName : this.fg.value['firstname'],
       lastName : this.fg.value['lastname']
     }
+    this._dialref.close(person)
 
-    this._ps.create(person)
-
-    this._dialref.close()
+    //this._ps.create(person)
   }
 
   close(){

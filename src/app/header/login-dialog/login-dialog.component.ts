@@ -18,8 +18,8 @@ export class LoginDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.fg = this._builder.group({
-      email : [null, Validators.required, Validators.email],
-      password : [null, Validators.required]
+      email : [null, [Validators.required, Validators.email]],
+      password : [null, [Validators.required]]
     })
   }
 
