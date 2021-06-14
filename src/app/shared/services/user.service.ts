@@ -24,7 +24,7 @@ export class UserService {
   
   emitFirstName() {
     this.firstnameSubject.next(this.firstname) //correspond au Invoke() d'un delegate c# 
-                                         //correspond a la méhtode Emit() d'un event js
+                                               //correspond a la méhtode Emit() d'un event js
 
     // this.statusBSubject.value
   }
@@ -47,6 +47,12 @@ export class UserService {
     )
   }
 
+  logout(){
+    localStorage.clear()
+    sessionStorage.clear()
+    this.emitFirstName()
+  }
+
   login(user : any) {
     this._client.post(this.url+"Auth/auth", user).subscribe( 
       (data : object) => {
@@ -57,7 +63,7 @@ export class UserService {
       sessionStorage.setItem('id', this.currentUser.id?.toString() ?? '0')
       sessionStorage.setItem('firstName', this.currentUser.firstName ?? '0')
       sessionStorage.setItem('isAdmin', this.currentUser.isAdmin?.toString() ?? false.toString())
-      console.log(this.currentUser)
+   
       this.emitFirstName()
       this._toastr.success("Vous êtes bien connecté", user.email, {duration : 5000})
       return this.currentUser

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbButtonModule, NbInputModule } from '@nebular/theme';
+import { NbButtonModule, NbDialogModule, NbInputModule, NbLayoutModule } from '@nebular/theme';
 
 @NgModule({
   declarations: [],
@@ -10,14 +10,15 @@ import { NbButtonModule, NbInputModule } from '@nebular/theme';
     FormsModule,
     ReactiveFormsModule, 
     NbInputModule, 
-    NbButtonModule
-    
+    NbButtonModule, 
+    NbDialogModule.forRoot()
   ], 
   exports : [
     FormsModule,
     ReactiveFormsModule, 
     NbInputModule, 
-    NbButtonModule
+    NbButtonModule, 
+    NbDialogModule
   ]
 })
 export class SharedModule { }

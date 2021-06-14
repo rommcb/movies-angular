@@ -38,4 +38,10 @@ export interface MovieToDal{
   scenaristID? :  number
 }
 
+export interface PersonToDal{
+
+  lastName? : string,
+  firstName? : string
+}
+
 

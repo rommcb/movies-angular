@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NbDialogService } from '@nebular/theme';
 import { never } from 'rxjs';
 import { Casting, MovieToDal, Person } from 'src/app/models/movie.model';
 import { MovieService } from 'src/app/shared/services/movie.service';
 import { PersonService } from 'src/app/shared/services/person.service';
+import { CreatePersonComponent } from '../create-person/create-person.component';
+import { ListComponent } from '../list/list.component';
 
 @Component({
   selector: 'app-create',
@@ -15,11 +18,13 @@ export class CreateComponent implements OnInit {
   fg: FormGroup = this._builder.group([])
   currentUser: MovieToDal = {}
   listPerson: Person[] = []
+  names: string[] = []
 
   constructor(
     private _builder: FormBuilder,
     private _ms : MovieService, 
-    private _ps: PersonService
+    private _ps: PersonService,
+    private dialogService: NbDialogService
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +41,11 @@ export class CreateComponent implements OnInit {
       scenarist: [null, Validators.required],
       actors : this._builder.array([])
     })
+  }
+
+  open() {
+    let ref = this.dialogService.open(CreatePersonComponent)
+    ref.onClose.subscribe(() => this.getPeople())
   }
 
   createItem(): FormGroup {
@@ -61,7 +71,6 @@ export class CreateComponent implements OnInit {
     this._ps.getAll().subscribe(
       (personList: Person[]) => {
         this.listPerson = personList
-        console.log(this.listPerson)
       },
       (error) => console.log(error.message)
     )

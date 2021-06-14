@@ -23,9 +23,7 @@ import { TokenInterceptor } from './movies/token.interceptor';
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbToastrModule.forRoot(),
-    // NbDialogModule.forRoot(),
     NbThemeModule.forRoot({ name: 'dark' }), 
-    NbLayoutModule,
     // NbEvaIconsModule, 
     NbButtonModule,
     NbCardModule,
@@ -34,7 +32,8 @@ import { TokenInterceptor } from './movies/token.interceptor';
     NbSelectModule,
     // NbSpinnerModule
     HttpClientModule, 
-    NbDatepickerModule.forRoot()
+    NbDatepickerModule.forRoot(), 
+    NbLayoutModule
   ],
   providers: [{ provide : HTTP_INTERCEPTORS, useClass : TokenInterceptor, multi : true}],
   bootstrap: [AppComponent]

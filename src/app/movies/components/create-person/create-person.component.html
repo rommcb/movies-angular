@@ -1,0 +1,12 @@
+<nb-card>
+  <nb-card-body>
+    <form [formGroup]="fg" (ngSubmit)=submitForm()>
+
+        <p>Prénom: <input nbInput formControlName="firstname" type="text"> </p>
+        <p>Nom: <input nbInput formControlName="lastname" type="text"></p>
+
+
+      <button status="success" nbButton type="submit">Ajouter</button> &nbsp; <button nbButton (click)="close()" status="danger" type="button">Annuler</button>
+    </form>
+  </nb-card-body>
+</nb-card>

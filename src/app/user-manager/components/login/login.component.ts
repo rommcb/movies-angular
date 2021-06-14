@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthUser } from 'src/app/models/auth.model';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -20,14 +21,13 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private _builder : FormBuilder,
-    private _us : UserService
+    private _us : UserService, 
+    private _router : Router
     ) { }
 
   ngOnInit(): void {
     this.initForm()
   }
-
- 
   
   initForm() : void{
     this.fg  = this._builder.group({
@@ -43,7 +43,13 @@ export class LoginComponent implements OnInit {
     }
     this._us.login(user)
     this.currentUser = this._us.currentUser
+    this._router.navigate(['/movies/list'])
   }
 
+  logout(){
+    console.log('logout')
+    this._us.logout()
+    this.sessionStorageObject = {}
+  }
 
 }

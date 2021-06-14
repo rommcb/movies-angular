@@ -1,20 +1,25 @@
 
-<h2 *ngIf="sessionStorageObject.token == ''">Vous êtes déjà connecté</h2>
+<div *ngIf="sessionStorageObject.token != null">
+  <h2>Vous êtes déjà connecté</h2>
+  <button status="danger" nbButton type="button" (click)="logout()">Logout</button>
+</div>
 
-<h2 *ngIf="sessionStorageObject.token != ''">Login</h2>
-<form [formGroup]="fg"  (ngSubmit)="login()">
-  <p>
-    <label>email : </label>
-    <input nbInput formControlName="email" />
-  </p>
-  <p>
-    <label>password : </label>
-    <input nbInput formControlName="password" />
-  </p>
-  
-  <button nbButton status="success" type="submit">Valider</button>
-  
-</form>
+<div *ngIf="sessionStorageObject.token == null">
+  <h2>Login</h2>
+  <form [formGroup]="fg"  (ngSubmit)="login()">
+    <p>
+      <label>email : </label>
+      <input nbInput formControlName="email" />
+    </p>
+    <p>
+      <label>password : </label>
+      <input nbInput formControlName="password" />
+    </p>
+    
+    <button nbButton status="success" type="submit">Valider</button>
+    
+  </form>
+</div>
 
 <!-- <p *ngIf='sessionStorageObject != null'>
   

@@ -10,6 +10,9 @@ export class NavComponent implements OnInit {
 
   listMenu: NbMenuItem[] = []
 
+  isConnected : boolean = false
+  isAdmin : boolean = false
+
   constructor() { }
 
   ngOnInit(): void {
@@ -22,5 +25,11 @@ export class NavComponent implements OnInit {
       ] }
     ]
   }
+
+  initMenu(){
+  
+  }
+
+  
 
 }
