@@ -1,1 +1,6 @@
-<p *ngIf='firstName != ""'>Bienvenue {{firstName}}</p>
+<p *ngIf='currentUser.token != null'>
+  Bienvenue {{currentUser.firstName}} &nbsp;
+  <button  nbButton size="small" (click)="disconnect()">Se déconnecter</button></p>
+<p *ngIf='currentUser.token == null'>
+  <button nbButton size="small" (click)="connect()">Se connecter</button>
+</p>

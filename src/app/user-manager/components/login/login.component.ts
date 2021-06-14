@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 import { AuthUser } from 'src/app/models/auth.model';
+import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -13,10 +15,10 @@ export class LoginComponent implements OnInit {
 
   fg : FormGroup = this._builder.group([])
   currentUser : AuthUser = {}
+
   sessionStorageObject : any = {
-    id : sessionStorage.getItem('id') ?? 'Vous n etes pas connecté', 
-    firstName :sessionStorage.getItem('firstName') ?? 'Vous n etes pas connecté',
-    token : sessionStorage.getItem('token') ?? 'Vous n etes pas connecté'
+    firstName :sessionStorage.getItem('firstName') ?? null,
+    token : sessionStorage.getItem('token') ?? null
   }
 
   constructor(

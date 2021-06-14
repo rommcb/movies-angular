@@ -1,0 +1,14 @@
+
+  <h2>Login</h2>
+  <form [formGroup]="fg"  (ngSubmit)="onSubmit()">
+    <p>
+      <label>email : </label><input nbInput formControlName="email" />
+    </p>
+    <p>
+      <label>password : </label><input type="password" nbInput formControlName="password" />
+    </p>
+    
+    <button nbButton status="success" type="submit">Valider</button>
+    
+  </form>
+

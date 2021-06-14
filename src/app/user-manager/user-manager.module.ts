@@ -15,10 +15,10 @@ import { NbDatepickerModule, NbToastrModule } from '@nebular/theme';
   ],
   imports: [
     CommonModule,
-    UserManagerRoutingModule, 
-    SharedModule,
-    NbDatepickerModule,
-    NbToastrModule
+    UserManagerRoutingModule,
+    NbToastrModule,
+    NbDatepickerModule, 
+    SharedModule
   ]
 })
 export class UserManagerModule { }

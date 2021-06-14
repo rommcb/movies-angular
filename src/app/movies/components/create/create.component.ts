@@ -18,17 +18,16 @@ export class CreateComponent implements OnInit {
   fg: FormGroup = this._builder.group([])
   currentUser: MovieToDal = {}
   listPerson: Person[] = []
-  names: string[] = []
 
   constructor(
     private _builder: FormBuilder,
-    private _ms : MovieService, 
+    private _ms: MovieService,
     private _ps: PersonService,
     private dialogService: NbDialogService
   ) { }
 
   ngOnInit(): void {
-    this.getPeople()
+    this.getPeople() // il faut ajouter un resolver pour notre getPeople()
     this.initForm()
   }
 
@@ -39,7 +38,7 @@ export class CreateComponent implements OnInit {
       releaseYear: [null, Validators.required],
       realisator: [null, Validators.required],
       scenarist: [null, Validators.required],
-      actors : this._builder.array([])
+      actors: this._builder.array([])
     })
   }
 
@@ -50,20 +49,20 @@ export class CreateComponent implements OnInit {
 
   createItem(): FormGroup {
     return this._builder.group({
-      personId:  [null, Validators.required],
+      personId: [null, Validators.required],
       role: [null, Validators.required]
     });
   }
 
-  addRole() : void {
+  addRole(): void {
     this.getRoles().push(this.createItem())
-   }
+  }
 
-   getRoles() : FormArray {
+  getRoles(): FormArray {
     return this.fg.get('actors') as FormArray
-   }
+  }
 
-  removeRole(index : number) : void {
+  removeRole(index: number): void {
     this.getRoles().removeAt(index)
   }
 
@@ -78,19 +77,14 @@ export class CreateComponent implements OnInit {
 
   submitForm() {
     let movieToDAL = {
-       title : this.fg.value['title'],
-       description :  this.fg.value['description'],
-        releaseYear : this.fg.value['releaseYear'],
-        realisatorID : Number(this.fg.value['realisator']),  
-        scenaristID :  Number(this.fg.value['scenarist'])
+      title: this.fg.value['title'],
+      description: this.fg.value['description'],
+      releaseYear: this.fg.value['releaseYear'],
+      realisatorID: Number(this.fg.value['realisator']),
+      scenaristID: Number(this.fg.value['scenarist'])
     }
-
-    let casting : Casting[]= this.fg.value['actors']
-    console.log(casting)
-    
+    let casting: Casting[] = this.fg.value['actors']
     this._ms.create(movieToDAL, casting)
-
-     // this._ms.setActor()
   }
 
 

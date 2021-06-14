@@ -5,75 +5,91 @@ import { Observable, Subject } from 'rxjs';
 import { AuthUser } from 'src/app/models/auth.model';
 import { User } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class UserService {
-  
-  private url : string = environment.urlApi1
-  currentUser : AuthUser = {}
- 
-  get firstname() : string {
+
+  private url: string = environment.urlApi1
+  currentUser: AuthUser = {}
+
+  //--------------------------------
+  get firstname(): string {
     return sessionStorage.getItem('firstName') ?? ''
   }
 
-  firstnameSubject : Subject<string> = new Subject<string>()
-  //statusBSubject : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.status)
-  
-  emitFirstName() {
-    this.firstnameSubject.next(this.firstname) //correspond au Invoke() d'un delegate c# 
-                                               //correspond a la méhtode Emit() d'un event js
 
-    // this.statusBSubject.value
+  currentUserSubject: Subject<AuthUser> = new Subject<AuthUser>();
+
+  emitUser() {
+    if (this.currentUser == null && sessionStorage.getItem('token')) {
+      this.getUser(Number.parseInt(sessionStorage.getItem('token') ?? '')).subscribe(
+        (data: AuthUser) => {
+          this.currentUser = data;
+          this.currentUserSubject.next(this.currentUser)
+        }
+      )
+    }
+    else {
+      this.currentUserSubject.next(this.currentUser)
+    }
   }
 
+  decodeToken(token: string): number {
+    let decodedToken: any = jwt_decode(token)
+    return Number.parseInt(decodedToken['unique_name'])
+  }
+
+  // ------------------------------------------------
+
   constructor(
-    private _client : HttpClient, 
-    private _toastr : NbToastrService
+    private _client: HttpClient,
+    private _toastr: NbToastrService
   ) { }
 
-  register(user : User) {
-      this._client.post(this.url+"User/register", user, {responseType : 'text'}).subscribe( 
-        () => {
-        this._toastr.success("Vous êtes bien enregistré", user.email, {duration : 5000})
+  getUser(id: number): Observable<User> {
+    return this._client.get<User>(this.url + '/user/' + id)
+  }
+
+  register(user: User) {
+    this._client.post(this.url + "User/register", user, { responseType: 'text' }).subscribe(
+      () => {
+        this._toastr.success("Vous êtes bien enregistré", user.email, { duration: 5000 })
       },
-        (error) => {
-        this._toastr.danger(error.message, {duration : 500000})
+      (error) => {
+        this._toastr.danger(error.message, { duration: 500000 })
         console.log(error)
       },
-        () => {this._toastr.info("Traitement de la méthode register() terminée", "titre", { position : NbGlobalLogicalPosition.BOTTOM_END})}
+      () => { this._toastr.info("Traitement de la méthode register() terminée", "titre", { position: NbGlobalLogicalPosition.BOTTOM_END }) }
     )
   }
 
-  logout(){
-    localStorage.clear()
-    sessionStorage.clear()
-    this.emitFirstName()
+  login(user: any) {
+    this._client.post(this.url + "Auth/auth", user).subscribe(
+      (data: object) => {
+
+        this.currentUser = data
+        sessionStorage.setItem('token', this.currentUser.token ?? '')
+        sessionStorage.setItem('firstName', this.currentUser.firstName ?? '0')
+        sessionStorage.setItem('isAdmin', this.currentUser.isAdmin?.toString() ?? false.toString())
+
+        this.emitUser()
+
+        this._toastr.success("Vous êtes bien connecté", user.email, { position: NbGlobalLogicalPosition.TOP_END, duration: 5000 })
+
+        return this.currentUser
+      }, (error) => { this._toastr.danger(error.message, { duration: 500000 }) }
+    )
   }
 
-  login(user : any) {
-    this._client.post(this.url+"Auth/auth", user).subscribe( 
-      (data : object) => {
-      localStorage.clear()
-      sessionStorage.clear()
-      this.currentUser = data
-      sessionStorage.setItem('token', this.currentUser.token ?? '')
-      sessionStorage.setItem('id', this.currentUser.id?.toString() ?? '0')
-      sessionStorage.setItem('firstName', this.currentUser.firstName ?? '0')
-      sessionStorage.setItem('isAdmin', this.currentUser.isAdmin?.toString() ?? false.toString())
-   
-      this.emitFirstName()
-      this._toastr.success("Vous êtes bien connecté", user.email, {duration : 5000})
-      return this.currentUser
-    },
-      (error) => {
-      this._toastr.danger(error.message, {duration : 500000})
-      console.log(error)
-    },
-      () => {this._toastr.info("Traitement de la méthode login() terminée", "titre", { position : NbGlobalLogicalPosition.BOTTOM_END})}
-  )
-}
+  logout() {
+    localStorage.clear()
+    sessionStorage.clear()
+    this.emitUser()
+  }
+
 }
 
